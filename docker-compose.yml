@@ -1,0 +1,9 @@
+version: "3.7"
+services:
+  portforwarder:
+    image: fightingsleep/portforwarder:latest
+    container_name: portforwarder
+    network_mode: "host"
+    volumes:
+      - ./config-example.json:/app/config.json
+    restart: unless-stopped
