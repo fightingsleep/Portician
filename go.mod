@@ -1,4 +1,4 @@
-module github.com/fightingsleep/portforwarder
+module github.com/fightingsleep/portician
 
 go 1.17
 

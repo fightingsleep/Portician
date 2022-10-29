@@ -1,4 +1,13 @@
 {
-    "externalport": 30778,
-    "internalport": 30778
+    "updateinterval": 300,
+    "configs": [
+        {
+            "externalport": 30778,
+            "internalport": 30778
+        },
+        {
+            "externalport": 30779,
+            "internalport": 30779
+        }
+    ]
 }

@@ -1,4 +1,4 @@
-package portforwarder
+package portician
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/fightingsleep/portforwarder/portforwarderconfig"
+	conf "github.com/fightingsleep/portician/porticianconfig"
 	"github.com/huin/goupnp/dcps/internetgateway2"
 	"golang.org/x/sync/errgroup"
 )
@@ -70,7 +70,7 @@ func PickRouterClient(ctx context.Context) (RouterClient, error) {
 	}
 }
 
-func GetIPAndForwardPort(ctx context.Context, config portforwarderconfig.Config) error {
+func ForwardPort(ctx context.Context, config conf.PortForwardConfig) error {
 	client, err := PickRouterClient(ctx)
 	if err != nil {
 		return err

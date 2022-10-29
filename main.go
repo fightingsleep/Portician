@@ -6,8 +6,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/fightingsleep/portforwarder/portforwarder"
-	"github.com/fightingsleep/portforwarder/portforwarderconfig"
+	"github.com/fightingsleep/portician/portician"
+	conf "github.com/fightingsleep/portician/porticianconfig"
 )
 
 func main() {
@@ -16,22 +16,24 @@ func main() {
 	}
 
 	// Read the config
-	config, err := portforwarderconfig.LoadConfiguration(os.Args[1])
+	configuration, err := conf.LoadConfiguration(os.Args[1])
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	config, err = portforwarderconfig.ValidateConfiguration(config)
+	err = conf.ValidateConfiguration(&configuration)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for {
-		// Forward the port every x seconds
-		err = portforwarder.GetIPAndForwardPort(context.Background(), config)
-		if err != nil {
-			log.Fatal(err)
+		for _, config := range configuration.Configs {
+			// Forward the port every x seconds
+			err = portician.ForwardPort(context.Background(), config)
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
-		time.Sleep(time.Second * time.Duration(config.UpdateInterval))
+		time.Sleep(time.Second * time.Duration(configuration.UpdateInterval))
 	}
 }

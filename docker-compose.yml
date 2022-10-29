@@ -1,9 +1,11 @@
+# NOTE: Don't run portician in a container on Windows (see README)
 version: "3.7"
 services:
-  portforwarder:
-    image: fightingsleep/portforwarder:latest
-    container_name: portforwarder
+  portician:
+    image: fightingsleep/portician:latest
+    container_name: portician
     network_mode: "host"
     volumes:
+      # /PATH/TO/YOUR/CONFIG/FILE.JSON : /app/config.json
       - ./config-example.json:/app/config.json
     restart: unless-stopped
