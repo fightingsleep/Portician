@@ -1,4 +1,4 @@
-# 🤌 portician 🤌
+# 🤌 Portician 🤌
 
 Periodically forward a port using [Universal Plug and Play (UPnP)](https://en.wikipedia.org/wiki/Universal_Plug_and_Play)
 
