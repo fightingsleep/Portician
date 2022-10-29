@@ -1,4 +1,4 @@
-package porticianconfig
+package portician
 
 import (
 	"encoding/json"
@@ -40,38 +40,38 @@ func LoadConfiguration(file string) (Config, error) {
 
 func ValidateConfiguration(config *Config) error {
 	if config.UpdateInterval == 0 {
-		fmt.Println("🤌Update interval not set, using 300 seconds")
+		fmt.Println("🤌  Update interval not set, using 300 seconds")
 		config.UpdateInterval = 300
 	}
 
 	for index, _ := range config.Configs {
 		if config.Configs[index].ExternalPort == 0 {
-			return fmt.Errorf("🚨error in config '%d'. external port must be specified🚨", index)
+			return fmt.Errorf("🚨  error in config '%d'. external port must be specified  🚨", index)
 		}
 
 		if config.Configs[index].InternalPort == 0 {
-			return fmt.Errorf("🚨error in config '%d'. internal port must be specified🚨", index)
+			return fmt.Errorf("🚨  error in config '%d'. internal port must be specified  🚨", index)
 		}
 
 		if len(strings.TrimSpace(config.Configs[index].Protocol)) == 0 {
-			fmt.Printf("🤌Protocol not specified in config '%d'. Using TCP\n", index)
+			fmt.Printf("🤌  Protocol not specified in config '%d'. Using TCP\n", index)
 			config.Configs[index].Protocol = "TCP"
 		}
 
 		if len(strings.TrimSpace(config.Configs[index].InternalIp)) == 0 {
 			ipaddress := GetOutboundIP()
-			fmt.Printf("🤌Internal IP not specified in config '%d', using '%s'\n", index, ipaddress)
+			fmt.Printf("🤌  Internal IP not specified in config '%d', using '%s'\n", index, ipaddress)
 			config.Configs[index].InternalIp = ipaddress
 		}
 
 		if config.Configs[index].PortForwardDuration == 0 {
-			fmt.Printf("🤌Port forward duration not set in config '%d', using 3600 seconds\n", index)
+			fmt.Printf("🤌  Port forward duration not set in config '%d', using 3600 seconds\n", index)
 			config.Configs[index].PortForwardDuration = 3600
 		}
 
 		if len(strings.TrimSpace(config.Configs[index].Description)) == 0 {
 			desc := "Port forwarded by portician"
-			fmt.Printf("🤌Description not set in config '%d', using '%s'\n", index, desc)
+			fmt.Printf("🤌  Description not set in config '%d', using '%s'\n", index, desc)
 			config.Configs[index].Description = desc
 		}
 	}

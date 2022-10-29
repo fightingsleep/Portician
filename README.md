@@ -20,16 +20,24 @@ Seems to work fine on Linux, or in a full Linux VM (if you set the virtual netwo
 
 <ins>***First, configure it:***</ins>
 
-Pretty simple to configure. Make sure there is a json file called `config.json` in the same directory as the executable. It should be in the following form:
+Create a `config.json` file like the following:
 ```
 {
-    "externalport": 30778,
-    "internalport": 30778,
-    "internalip": "192.168.0.9",
-    "portforwardduration": 3600,
-    "updateInterval": 300,
-    "protocol": "TCP",
-    "description": "Some description"
+    "updateinterval": 300,
+    "configs": [
+        {
+            "externalport": 30778,
+            "internalport": 30778,
+            "internalip": "192.168.0.9",
+            "portforwardduration": 3600,
+            "protocol": "TCP",
+            "description": "Some description"
+        },
+        {
+            "externalport": 30779,
+            "internalport": 30779
+        }
+    ]
 }
 ```
 Note that everything but `externalport` and `internalport` is optional. By default it will:
@@ -41,18 +49,17 @@ Note that everything but `externalport` and `internalport` is optional. By defau
 
 <ins>**Then, run it:**</ins>
 
-If you don't fall into the unfortunate category described above (ie: Docker on Windows), you can just run it in a docker container. Edit the `docker-compose.yml` file and change the volume path to point at wherever you config file sits. Then run:
+If you don't fall into the unfortunate category described above (ie: Docker on Windows), you can just run it in a docker container. **Edit the `deployments/docker-compose.yml` file and change the volume path to point at wherever you config file sits**. Then run:
 
 ```
-docker compose up -d
+make run_image
 ```
 
 Otherwise, don't run it in Docker. Go into the root directory, run
 ```
-go build -o portician
-```
-followed by (assuming your config file is called `config.json` and is in the same directory):
-```
+make build
+cd bin
+cp <CONFIG FILE PATH> ./config.json
 ./portician config.json
 ```
 

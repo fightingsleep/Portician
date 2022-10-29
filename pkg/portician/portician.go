@@ -3,10 +3,8 @@ package portician
 import (
 	"context"
 	"errors"
-	"fmt"
 	"time"
 
-	conf "github.com/fightingsleep/portician/porticianconfig"
 	"github.com/huin/goupnp/dcps/internetgateway2"
 	"golang.org/x/sync/errgroup"
 )
@@ -70,17 +68,11 @@ func PickRouterClient(ctx context.Context) (RouterClient, error) {
 	}
 }
 
-func ForwardPort(ctx context.Context, config conf.PortForwardConfig) error {
+func ForwardPort(ctx context.Context, config PortForwardConfig) error {
 	client, err := PickRouterClient(ctx)
 	if err != nil {
 		return err
 	}
-
-	externalIP, err := client.GetExternalIPAddress()
-	if err != nil {
-		return err
-	}
-	fmt.Println("Our external IP address is: ", externalIP)
 
 	return client.AddPortMapping(
 		"",

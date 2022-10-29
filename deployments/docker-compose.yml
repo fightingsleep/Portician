@@ -6,6 +6,4 @@ services:
     container_name: portician
     network_mode: "host"
     volumes:
-      # /PATH/TO/YOUR/CONFIG/FILE.JSON : /app/config.json
-      - ./config-example.json:/app/config.json
-    restart: unless-stopped
+      - <INSERT PATH TO YOUR CONFIG FILE HERE>:/app/config.json
