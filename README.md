@@ -49,7 +49,7 @@ Note that everything but `externalport` and `internalport` is optional. By defau
 
 <ins>**Then, run it:**</ins>
 
-If you don't fall into the unfortunate category described above (ie: Docker on Windows), you can just run it in a docker container. **Edit the `deployments/docker-compose.yml` file and change the volume path to point at wherever you config file sits**. Then run:
+If you don't fall into the unfortunate category described above (ie: Docker on Windows), you can just run it in a docker container. **Edit the `deployments/docker-compose.yml` file and change the volume path to point at wherever your config file sits**. Then run:
 
 ```
 make run_image
